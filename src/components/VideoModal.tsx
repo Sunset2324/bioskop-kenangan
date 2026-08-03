@@ -58,15 +58,13 @@ export default function VideoModal({ movie, onClose }: VideoModalProps) {
         </div>
 
         {/* video */}
-        <div className="aspect-video w-full bg-black">
-          <video
-            ref={videoRef}
-            key={movie.id}
-            src={src}
-            controls
-            autoPlay
-            playsInline
-            className="h-full w-full"
+        <div className="relative w-full pt-[56.25%]"> {/* Rasio 16:9 */}
+          <iframe 
+            src={`https://drive.google.com/file/d/${movie.gdrive_file_id}/preview`}
+            className="absolute top-0 left-0 w-full h-full rounded-lg shadow-2xl border border-white/10"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+            title={movie.title}
           />
         </div>
 
