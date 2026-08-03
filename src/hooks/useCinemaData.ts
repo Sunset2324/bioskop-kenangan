@@ -24,10 +24,7 @@ export function useCinemaData(): CinemaData {
 
       const [catRes, movRes] = await Promise.all([
         supabase.from('categories').select('*').order('sort_order', { ascending: true }),
-        supabase.from('categories').select(`
-          *,
-          movies:movies(count)
-        `).order('sort_order', { ascending: true }),
+        supabase.from('movies').select('*').order('title', { ascending: true }),
       ]);
 
       if (cancelled) return;
@@ -43,8 +40,16 @@ export function useCinemaData(): CinemaData {
         return;
       }
 
-      setCategories(catRes.data ?? []);
-      setMovies(movRes.data ?? []);
+      const allMovies = movRes.data ?? [];
+      const allCategories = catRes.data ?? [];
+
+      // 🔥 FILTER: Hanya tampilkan kategori yang punya episode
+      const categoriesWithMovies = allCategories.filter((cat) =>
+        allMovies.some((movie) => movie.category_id === cat.id)
+      );
+
+      setCategories(categoriesWithMovies);
+      setMovies(allMovies);
       setLoading(false);
     }
 
