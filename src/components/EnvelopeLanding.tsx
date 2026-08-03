@@ -5,6 +5,9 @@ interface EnvelopeLandingProps {
   onOpenCinema: () => void;
 }
 
+// 🔴 GANTI ID INI dengan ID file Google Drive video Anda
+const VIDEO_ID = '1rxvxpI3YQlZ73Le1mgMX_04lZIL0hzKH';
+
 export default function EnvelopeLanding({ onOpenCinema }: EnvelopeLandingProps) {
   const [opened, setOpened] = useState(false);
 
@@ -74,6 +77,19 @@ export default function EnvelopeLanding({ onOpenCinema }: EnvelopeLandingProps) 
             className="relative w-full max-w-lg rounded-lg border border-[#c9a14a]/30 bg-[#241414]/90 p-8 text-center shadow-2xl shadow-black/60 sm:p-10"
             style={{ animation: 'letterReveal 0.8s ease-out both' }}
           >
+            {/*  VIDEO GOOGLE DRIVE DI SINI */}
+            <div className="mb-6 w-full">
+              <div className="relative w-full overflow-hidden rounded-lg shadow-2xl" style={{ paddingBottom: '56.25%' }}>
+                <iframe
+                  src={`https://drive.google.com/file/d/${VIDEO_ID}/preview`}
+                  className="absolute top-0 left-0 h-full w-full border-0"
+                  allow="autoplay; encrypted-media"
+                  allowFullScreen
+                  title="Video Kenangan"
+                />
+              </div>
+            </div>
+
             <div className="mb-6 flex justify-center">
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#c9a14a]/15">
                 <Heart className="h-7 w-7 fill-[#c9a14a] text-[#c9a14a]" />
