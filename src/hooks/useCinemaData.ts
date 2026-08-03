@@ -24,7 +24,7 @@ export function useCinemaData(): CinemaData {
 
       const [catRes, movRes] = await Promise.all([
         supabase.from('categories').select('*').order('sort_order', { ascending: true }),
-        supabase.from('movies').select('*').order('created_at', { ascending: true }),
+        supabase.from('movies').select('*').order('title', { ascending: true }),
       ]);
 
       if (cancelled) return;
