@@ -5,7 +5,6 @@ interface EnvelopeLandingProps {
   onOpenCinema: () => void;
 }
 
-// 🔴 GANTI ID INI dengan ID file Google Drive video Anda
 const VIDEO_ID = '1rxvxpI3YQlZ73Le1mgMX_04lZIL0hzKH';
 
 export default function EnvelopeLanding({ onOpenCinema }: EnvelopeLandingProps) {
@@ -103,9 +102,17 @@ export default function EnvelopeLanding({ onOpenCinema }: EnvelopeLandingProps) 
               Selamat datang di bioskop kita
             </h2>
             <p className="mb-8 leading-relaxed text-[#e8d5b5]/80">
-              Di tempat ini, tiada film yang lebih manis dari kenangan kita bersama.
-              Duduklah, beristirahatlah, dan mari kita tonton kembali setiap momen
-              yang pernah membuat kita tersenyum. Layar ini hanya untuk kita berdua.
+              Behold, dear companion, in this chamber of delight,
+              No moving picture shines more bright
+              Than memories of days gone by,
+              When Mickey, Donald, Tom did fly
+              Across our young and wonder-struck eyes.
+              So rest thy weary bones and see
+              The magic that once captivated thee.
+              This screen, our private realm so dear,
+              Where laughter echoes, crystal clear.
+              For in these frames, our childhood lives,
+              A timeless gift the past still gives.
             </p>
 
             <button
@@ -113,7 +120,7 @@ export default function EnvelopeLanding({ onOpenCinema }: EnvelopeLandingProps) 
               onClick={onOpenCinema}
               className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#c9a14a] to-[#e0b85a] px-8 py-3 font-semibold text-[#1a0e0e] shadow-lg shadow-[#c9a14a]/20 transition-all hover:scale-105 hover:shadow-[#c9a14a]/40"
             >
-              Buka Bioskop Kita
+              Buka Bioskop Core Memory
               <Heart className="h-4 w-4 fill-[#1a0e0e] transition-transform group-hover:translate-x-0.5" />
             </button>
           </div>

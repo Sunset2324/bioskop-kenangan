@@ -35,11 +35,10 @@ export default function CinemaPage() {
             </span>
           </div>
           <h1 className="font-serif text-3xl font-semibold text-[#f5e6c8] sm:text-4xl">
-            Pilih film kita malam ini
+            Nikmati dan bersenang-senanglah
           </h1>
           <p className="mt-3 text-sm text-[#e8d5b5]/60">
-            Setiap film adalah kenangan yang kita bagikan. Pilih satu, dan mari kita tonton bersama.
-          </p>
+            Setiap dari mereka ada yang pernah dan tidak menemani kamu. Kalau ada request bilang saja
         </header>
 
         {/* tabs */}

@@ -45,7 +45,7 @@ export default function VideoModal({ movie, onClose }: VideoModalProps) {
         <div className="flex items-center justify-between border-b border-[#c9a14a]/15 px-5 py-4">
           <div>
             <h3 className="font-serif text-lg font-semibold text-[#f5e6c8]">{movie.title}</h3>
-            <p className="text-xs text-[#e8d5b5]/50">Bioskop Kenangan Kita</p>
+            <p className="text-xs text-[#e8d5b5]/50">Bioskop Core Memory</p>
           </div>
           <button
             type="button"
