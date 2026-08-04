@@ -96,11 +96,11 @@ export default function EnvelopeLanding({ onOpenCinema }: EnvelopeLandingProps) 
             </div>
 
             <p className="mb-2 font-serif text-sm uppercase tracking-[0.3em] text-[#c9a14a]/80">
-              Untukmu, sayang
+              For you, My Love
             </p>
             <h2 className="mb-5 font-serif text-2xl font-semibold text-[#f5e6c8] sm:text-3xl">
-              Selamat datang di bioskop kita
-            </h2>
+              Welcome to The Core Memory
+            {/* </h2>
             <p className="mb-8 leading-relaxed text-[#e8d5b5]/80">
               Behold, dear companion, in this chamber of delight,
               No moving picture shines more bright
@@ -113,7 +113,7 @@ export default function EnvelopeLanding({ onOpenCinema }: EnvelopeLandingProps) 
               Where laughter echoes, crystal clear.
               For in these frames, our childhood lives,
               A timeless gift the past still gives.
-            </p>
+            </p> */}
 
             <button
               type="button"
