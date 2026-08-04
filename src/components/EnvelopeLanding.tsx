@@ -38,7 +38,7 @@ export default function EnvelopeLanding({ onOpenCinema }: EnvelopeLandingProps) 
               Sebuah surat untukmu
             </p>
             <h1 className="mb-10 font-serif text-3xl font-semibold text-[#f5e6c8] sm:text-4xl">
-              Bioskop Kenangan Kita
+              Bioskop Core Memory
             </h1>
 
             {/* Envelope */}

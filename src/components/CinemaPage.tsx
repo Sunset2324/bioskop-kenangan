@@ -31,7 +31,7 @@ export default function CinemaPage() {
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#c9a14a]/30 bg-[#c9a14a]/5 px-4 py-1.5">
             <Film className="h-4 w-4 text-[#c9a14a]" />
             <span className="text-xs uppercase tracking-[0.3em] text-[#c9a14a]/80">
-              Bioskop Kenangan Kita
+              Bioskop Core Memory
             </span>
           </div>
           <h1 className="font-serif text-3xl font-semibold text-[#f5e6c8] sm:text-4xl">
