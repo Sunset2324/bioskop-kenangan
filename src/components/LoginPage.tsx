@@ -36,7 +36,7 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
             Area Privat
           </h1>
           <p className="mt-2 text-sm text-[#e8d5b5]/60">
-            Masukkan kunci untuk masuk ke bioskop kita
+            Masukkan kunci untuk masuk ke bioskop Core Memory
           </p>
         </div>
 
