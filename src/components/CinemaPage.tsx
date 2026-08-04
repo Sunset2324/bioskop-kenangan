@@ -38,7 +38,8 @@ export default function CinemaPage() {
             Nikmati dan bersenang-senanglah
           </h1>
           <p className="mt-3 text-sm text-[#e8d5b5]/60">
-            Setiap dari mereka ada yang pernah dan tidak menemani kamu. Kalau ada request bilang saja
+            Setiap dari mereka ada yang pernah dan tidak menemani kamu.
+          </p>
         </header>
 
         {/* tabs */}
