@@ -5,7 +5,7 @@ import CinemaPage from '@/components/CinemaPage';
 import LoginPage from '@/components/LoginPage';
 
 export default function App() {
-  const { user, loading, signIn } = useAuth();
+  const { user, loading, signIn, signOut } = useAuth(); // Tambahkan signOut
   const [entered, setEntered] = useState(false);
 
   // 1. Tampilkan loading saat cek sesi login
@@ -24,8 +24,14 @@ export default function App() {
 
   // 3. Jika sudah login, tampilkan alur Bioskop
   if (!entered) {
-    return <EnvelopeLanding onOpenCinema={() => setEntered(true)} />;
+    return (
+      <EnvelopeLanding 
+        onOpenCinema={() => setEntered(true)} 
+        onLogout={signOut} // Tambahkan ini agar bisa logout dari halaman amplop
+      />
+    );
   }
 
-  return <CinemaPage />;
+  // 4. Halaman Bioskop Utama
+  return <CinemaPage onBack={() => setEntered(false)} />;
 }

@@ -1,24 +1,34 @@
 import { useState } from 'react';
-import { Heart } from 'lucide-react';
-import { Loader2, ExternalLink } from 'lucide-react';
+import { Heart, Loader2, ExternalLink, Lock } from 'lucide-react';
 
 interface EnvelopeLandingProps {
   onOpenCinema: () => void;
+  onLogout?: () => void;
 }
 
 const VIDEO_ID = import.meta.env.VITE_WELCOME_VIDEO_ID as string;
 
-// Fallback safety: Jika env kosong, tampilkan warning di console
-if (!VIDEO_ID) {
-  console.warn('VITE_WELCOME_VIDEO_ID is missing in .env file');
-}
-
-export default function EnvelopeLanding({ onOpenCinema }: EnvelopeLandingProps) {
+export default function EnvelopeLanding({ onOpenCinema, onLogout }: EnvelopeLandingProps) {
   const [opened, setOpened] = useState(false);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
+  if (!VIDEO_ID) {
+    console.warn('VITE_WELCOME_VIDEO_ID is missing in .env file');
+  }
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#1a0e0e]">
+      {/* Tombol Kunci Ulang (Logout) */}
+      {onLogout && (
+        <button
+          onClick={onLogout}
+          className="absolute right-6 top-6 z-20 flex items-center gap-2 rounded-full border border-[#c9a14a]/20 bg-[#241414]/80 px-4 py-2 text-xs font-medium text-[#e8d5b5]/60 backdrop-blur-sm transition-all hover:border-[#c9a14a]/50 hover:text-[#c9a14a]"
+        >
+          <Lock className="h-3 w-3" />
+          <span>Kunci Ulang</span>
+        </button>
+      )}
+
       {/* ambient glow */}
       <div className="pointer-events-none absolute -top-40 left-1/2 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full bg-[#7b1e1e]/30 blur-3xl" />
       <div className="pointer-events-none absolute bottom-0 right-0 h-[30rem] w-[30rem] rounded-full bg-[#c9a14a]/10 blur-3xl" />
@@ -83,7 +93,7 @@ export default function EnvelopeLanding({ onOpenCinema }: EnvelopeLandingProps) 
             className="relative w-full max-w-lg rounded-lg border border-[#c9a14a]/30 bg-[#241414]/90 p-8 text-center shadow-2xl shadow-black/60 sm:p-10"
             style={{ animation: 'letterReveal 0.8s ease-out both' }}
           >
-            {/*  VIDEO GOOGLE DRIVE DI SINI */}
+            {/* VIDEO GOOGLE DRIVE */}
             <div className="mb-6 w-full">
               <div className="relative w-full overflow-hidden rounded-lg shadow-2xl bg-black" style={{ paddingBottom: '56.25%' }}>
                 {/* Loading Spinner */}
@@ -129,19 +139,6 @@ export default function EnvelopeLanding({ onOpenCinema }: EnvelopeLandingProps) 
             <h2 className="mb-5 font-serif text-2xl font-semibold text-[#f5e6c8] sm:text-3xl">
               Selamat datang di bioskop Core Memory
             </h2>
-            {/* <p className="mb-8 leading-relaxed text-[#e8d5b5]/80">
-              Behold, dear companion, in this chamber of delight,
-              No moving picture shines more bright
-              Than memories of days gone by,
-              When Mickey, Donald, Tom did fly
-              Across our young and wonder-struck eyes.
-              So rest thy weary bones and see
-              The magic that once captivated thee.
-              This screen, our private realm so dear,
-              Where laughter echoes, crystal clear.
-              For in these frames, our childhood lives,
-              A timeless gift the past still gives.
-            </p> */}
 
             <button
               type="button"

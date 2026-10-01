@@ -1,12 +1,16 @@
 import { useMemo, useState } from 'react';
-import { Film, Heart, Loader2, LogOut } from 'lucide-react';
+import { Film, Heart, Loader2, LogOut, ArrowLeft } from 'lucide-react';
 import { useCinemaData } from '@/hooks/useCinemaData';
 import { useAuth } from '@/hooks/useAuth';
 import type { Movie } from '@/types';
 import MovieCard from './MovieCard';
 import VideoModal from './VideoModal';
 
-export default function CinemaPage() {
+interface CinemaPageProps {
+  onBack: () => void;
+}
+
+export default function CinemaPage({ onBack }: CinemaPageProps) {
   const { categories, movies, loading, error } = useCinemaData();
   const { signOut } = useAuth();
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
@@ -30,16 +34,26 @@ export default function CinemaPage() {
       <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
         {/* header */}
         <header className="relative mb-10 text-center">
-          {/* Tombol Logout di Pojok Kanan Atas */}
-          <button
-            onClick={async () => {
-              await signOut();
-            }}
-            className="absolute right-0 top-0 flex items-center gap-2 rounded-full border border-[#c9a14a]/30 bg-[#241414] px-4 py-2 text-xs font-medium text-[#c9a14a] transition-all hover:bg-[#c9a14a] hover:text-[#1a0e0e]"
-          >
-            <LogOut className="h-4 w-4" />
-            <span>Keluar</span>
-          </button>
+          {/* Tombol Navigasi di Pojok Kanan Atas */}
+          <div className="absolute right-0 top-0 flex items-center gap-2">
+            {/* Tombol Kembali ke Amplop */}
+            <button
+              onClick={onBack}
+              className="flex items-center gap-2 rounded-full border border-[#c9a14a]/30 bg-[#241414] px-4 py-2 text-xs font-medium text-[#e8d5b5]/70 transition-all hover:bg-[#c9a14a]/10 hover:text-[#c9a14a]"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              <span>Kembali</span>
+            </button>
+
+            {/* Tombol Logout */}
+            <button
+              onClick={async () => { await signOut(); }}
+              className="flex items-center gap-2 rounded-full border border-[#c9a14a]/30 bg-[#241414] px-4 py-2 text-xs font-medium text-[#c9a14a] transition-all hover:bg-[#c9a14a] hover:text-[#1a0e0e]"
+            >
+              <LogOut className="h-4 w-4" />
+              <span>Keluar</span>
+            </button>
+          </div>
 
           {/* Konten Header Asli */}
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#c9a14a]/30 bg-[#c9a14a]/5 px-4 py-1.5">
