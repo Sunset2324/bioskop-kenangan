@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
-import { User, Session } from '@supabase/supabase-js';
+import { User, Session, AuthError } from '@supabase/supabase-js';
 
 export function useAuth() {
   const [user, setUser] = useState<User | null>(null);
@@ -26,7 +26,8 @@ export function useAuth() {
     return () => subscription.unsubscribe();
   }, []);
 
-  const signIn = async (email: string, password: string) => {
+  // Perbaikan: Tambahkan tipe return AuthError | null
+  const signIn = async (email: string, password: string): Promise<AuthError | null> => {
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -34,7 +35,8 @@ export function useAuth() {
     return error;
   };
 
-  const signOut = async () => {
+  // Perbaikan: Tambahkan tipe return AuthError | null
+  const signOut = async (): Promise<AuthError | null> => {
     const { error } = await supabase.auth.signOut();
     return error;
   };

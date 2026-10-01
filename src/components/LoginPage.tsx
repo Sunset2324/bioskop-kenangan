@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Lock, Mail, AlertCircle } from 'lucide-react';
+import { AuthError } from '@supabase/supabase-js';
 
 interface LoginPageProps {
-  onLogin: (email: string, password: string) => Promise<any>;
+  onLogin: (email: string, password: string) => Promise<AuthError | null>;
 }
 
 export default function LoginPage({ onLogin }: LoginPageProps) {
