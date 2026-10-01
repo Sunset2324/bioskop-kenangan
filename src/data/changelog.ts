@@ -16,6 +16,8 @@ export const changelogData: ChangelogEntry[] = [
       "Menambahkan tombol 'Kembali' dan 'Kunci Ulang' untuk navigasi yang lebih mudah.",
       "Memperbaiki error loading pada pemutar video.",
       "Menambahkan catatan pembaruan ini!",
+      "Peningkatan performa dan stabilitas aplikasi.",
+      "Menambahkan fitur thumbnail untuk film yang tidak memiliki gambar."
     ]
   },
   {
