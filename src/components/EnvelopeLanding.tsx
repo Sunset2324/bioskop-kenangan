@@ -5,7 +5,12 @@ interface EnvelopeLandingProps {
   onOpenCinema: () => void;
 }
 
-const VIDEO_ID = '1rxvxpI3YQlZ73Le1mgMX_04lZIL0hzKH';
+const VIDEO_ID = import.meta.env.VITE_WELCOME_VIDEO_ID as string;
+
+// Fallback safety: Jika env kosong, tampilkan warning di console
+if (!VIDEO_ID) {
+  console.warn('VITE_WELCOME_VIDEO_ID is missing in .env file');
+}
 
 export default function EnvelopeLanding({ onOpenCinema }: EnvelopeLandingProps) {
   const [opened, setOpened] = useState(false);

@@ -1,12 +1,14 @@
 import { useMemo, useState } from 'react';
-import { Film, Heart, Loader2 } from 'lucide-react';
+import { Film, Heart, Loader2, LogOut } from 'lucide-react';
 import { useCinemaData } from '@/hooks/useCinemaData';
+import { useAuth } from '@/hooks/useAuth';
 import type { Movie } from '@/types';
 import MovieCard from './MovieCard';
 import VideoModal from './VideoModal';
 
 export default function CinemaPage() {
   const { categories, movies, loading, error } = useCinemaData();
+  const { signOut } = useAuth();
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
   const [selected, setSelected] = useState<Movie | null>(null);
 
@@ -27,7 +29,19 @@ export default function CinemaPage() {
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
         {/* header */}
-        <header className="mb-10 text-center">
+        <header className="relative mb-10 text-center">
+          {/* Tombol Logout di Pojok Kanan Atas */}
+          <button
+            onClick={async () => {
+              await signOut();
+            }}
+            className="absolute right-0 top-0 flex items-center gap-2 rounded-full border border-[#c9a14a]/30 bg-[#241414] px-4 py-2 text-xs font-medium text-[#c9a14a] transition-all hover:bg-[#c9a14a] hover:text-[#1a0e0e]"
+          >
+            <LogOut className="h-4 w-4" />
+            <span>Keluar</span>
+          </button>
+
+          {/* Konten Header Asli */}
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#c9a14a]/30 bg-[#c9a14a]/5 px-4 py-1.5">
             <Film className="h-4 w-4 text-[#c9a14a]" />
             <span className="text-xs uppercase tracking-[0.3em] text-[#c9a14a]/80">
