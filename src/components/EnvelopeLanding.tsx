@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Heart } from 'lucide-react';
+import { Loader2, ExternalLink } from 'lucide-react';
 
 interface EnvelopeLandingProps {
   onOpenCinema: () => void;
@@ -14,6 +15,7 @@ if (!VIDEO_ID) {
 
 export default function EnvelopeLanding({ onOpenCinema }: EnvelopeLandingProps) {
   const [opened, setOpened] = useState(false);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#1a0e0e]">
@@ -83,14 +85,35 @@ export default function EnvelopeLanding({ onOpenCinema }: EnvelopeLandingProps) 
           >
             {/*  VIDEO GOOGLE DRIVE DI SINI */}
             <div className="mb-6 w-full">
-              <div className="relative w-full overflow-hidden rounded-lg shadow-2xl" style={{ paddingBottom: '56.25%' }}>
+              <div className="relative w-full overflow-hidden rounded-lg shadow-2xl bg-black" style={{ paddingBottom: '56.25%' }}>
+                {/* Loading Spinner */}
+                {!isVideoLoaded && (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-[#c9a14a]">
+                    <Loader2 className="h-8 w-8 animate-spin" />
+                    <p className="text-xs text-[#e8d5b5]/60">Menyiapkan video...</p>
+                  </div>
+                )}
+
                 <iframe
                   src={`https://drive.google.com/file/d/${VIDEO_ID}/preview`}
-                  className="absolute top-0 left-0 h-full w-full border-0"
+                  className={`absolute top-0 left-0 h-full w-full border-0 transition-opacity duration-500 ${
+                    isVideoLoaded ? 'opacity-100' : 'opacity-0'
+                  }`}
                   allow="autoplay; encrypted-media"
                   allowFullScreen
                   title="Video Kenangan"
+                  onLoad={() => setIsVideoLoaded(true)}
                 />
+                
+                {/* Fallback jika iframe gagal dimuat */}
+                <a 
+                  href={`https://drive.google.com/file/d/${VIDEO_ID}/view`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute bottom-2 right-2 z-20 flex items-center gap-1 rounded bg-black/60 px-2 py-1 text-[10px] text-white backdrop-blur hover:bg-black/80"
+                >
+                  <ExternalLink className="h-3 w-3" /> Buka di Tab Baru
+                </a>
               </div>
             </div>
 

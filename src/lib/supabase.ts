@@ -11,9 +11,3 @@ if (!supabaseUrl || !supabaseAnonKey) {
 }
 
 export const supabase = createClient(supabaseUrl ?? '', supabaseAnonKey ?? '');
-
-export const workerBaseUrl = (import.meta.env.VITE_WORKER_BASE_URL as string) ?? '';
-
-export function videoUrlFor(gdriveFileId: string): string {
-  return `${workerBaseUrl}/video?id=${gdriveFileId}`;
-}
