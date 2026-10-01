@@ -1,10 +1,12 @@
 import { useMemo, useState } from 'react';
-import { Film, Heart, Loader2, LogOut, ArrowLeft } from 'lucide-react';
+import { Film, Heart, Loader2, LogOut, ArrowLeft, FileText } from 'lucide-react';
 import { useCinemaData } from '@/hooks/useCinemaData';
 import { useAuth } from '@/hooks/useAuth';
+import { useVisitCounter } from '@/hooks/useVisitCounter';
 import type { Movie } from '@/types';
 import MovieCard from './MovieCard';
 import VideoModal from './VideoModal';
+import UpdateNotesModal from './UpdateNotesModal';
 
 interface CinemaPageProps {
   onBack: () => void;
@@ -13,8 +15,13 @@ interface CinemaPageProps {
 export default function CinemaPage({ onBack }: CinemaPageProps) {
   const { categories, movies, loading, error } = useCinemaData();
   const { signOut } = useAuth();
+  
+  // Panggil hook ini agar tetap mencatat kunjungan secara diam-diam di background
+  useVisitCounter();
+
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
   const [selected, setSelected] = useState<Movie | null>(null);
+  const [isNotesOpen, setIsNotesOpen] = useState(false);
 
   const activeCategory = useMemo(
     () => categories.find((c) => c.slug === activeSlug) ?? categories[0] ?? null,
@@ -36,13 +43,23 @@ export default function CinemaPage({ onBack }: CinemaPageProps) {
         <header className="relative mb-10 text-center">
           {/* Tombol Navigasi di Pojok Kanan Atas */}
           <div className="absolute right-0 top-0 flex items-center gap-2">
+            {/* Tombol Catatan Update */}
+            <button
+              onClick={() => setIsNotesOpen(true)}
+              className="flex items-center gap-2 rounded-full border border-[#c9a14a]/30 bg-[#241414] px-4 py-2 text-xs font-medium text-[#e8d5b5]/70 transition-all hover:bg-[#c9a14a]/10 hover:text-[#c9a14a]"
+              title="Lihat pembaruan terbaru"
+            >
+              <FileText className="h-4 w-4" />
+              <span className="hidden sm:inline">Update</span>
+            </button>
+
             {/* Tombol Kembali ke Amplop */}
             <button
               onClick={onBack}
               className="flex items-center gap-2 rounded-full border border-[#c9a14a]/30 bg-[#241414] px-4 py-2 text-xs font-medium text-[#e8d5b5]/70 transition-all hover:bg-[#c9a14a]/10 hover:text-[#c9a14a]"
             >
               <ArrowLeft className="h-4 w-4" />
-              <span>Kembali</span>
+              <span className="hidden sm:inline">Kembali</span>
             </button>
 
             {/* Tombol Logout */}
@@ -51,11 +68,10 @@ export default function CinemaPage({ onBack }: CinemaPageProps) {
               className="flex items-center gap-2 rounded-full border border-[#c9a14a]/30 bg-[#241414] px-4 py-2 text-xs font-medium text-[#c9a14a] transition-all hover:bg-[#c9a14a] hover:text-[#1a0e0e]"
             >
               <LogOut className="h-4 w-4" />
-              <span>Keluar</span>
+              <span className="hidden sm:inline">Keluar</span>
             </button>
           </div>
 
-          {/* Konten Header Asli */}
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#c9a14a]/30 bg-[#c9a14a]/5 px-4 py-1.5">
             <Film className="h-4 w-4 text-[#c9a14a]" />
             <span className="text-xs uppercase tracking-[0.3em] text-[#c9a14a]/80">
@@ -70,7 +86,7 @@ export default function CinemaPage({ onBack }: CinemaPageProps) {
           </p>
         </header>
 
-        {/* tabs */}
+        {/* tabs & content */}
         {loading ? (
           <div className="flex flex-col items-center justify-center gap-3 py-24 text-[#e8d5b5]/60">
             <Loader2 className="h-8 w-8 animate-spin text-[#c9a14a]" />
@@ -125,10 +141,14 @@ export default function CinemaPage({ onBack }: CinemaPageProps) {
 
         {/* footer */}
         <footer className="mt-16 text-center text-xs text-[#e8d5b5]/40">
-          Dibuat dengan cinta, untuk kita.
+          <p>Dibuat dengan cinta, untuk kita.</p>
         </footer>
       </div>
 
+      {/* Modal Catatan Update */}
+      <UpdateNotesModal isOpen={isNotesOpen} onClose={() => setIsNotesOpen(false)} />
+      
+      {/* Modal Video */}
       <VideoModal movie={selected} onClose={() => setSelected(null)} />
     </div>
   );
